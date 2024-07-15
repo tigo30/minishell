@@ -3,16 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgrunho- <tgrunho-@student.42.fr>>         +#+  +:+       +#+        */
+/*   By: macampos <macampos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 16:58:47 by macampos          #+#    #+#             */
-/*   Updated: 2024/06/28 20:34:36 by tgrunho-         ###   ########.fr       */
+/*   Updated: 2024/06/28 10:19:48 by macampos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	print_dolar(t_main *main, char *arg)
+int	check_equal(char *value)
+{
+	int	i;
+
+	i = 0;
+	while (value[i] && i < (int)ft_strlen(value))
+	{
+		if (value[i] == '=')
+			return (i);
+		i++;
+	}
+	return (-1);
+}
+
+void print_$(t_main *main, char *arg)
 {
 	int		i;
 	char	**value;
@@ -25,7 +39,14 @@ void	print_dolar(t_main *main, char *arg)
 		return ;
 	}
 	if (arg[0] == '?')
-		handle_status_case(main, arg);
+	{
+		printf("%i", main->status);
+		while (arg[i] && arg[i] != ' ')
+		{
+			printf("%c", arg[i]);
+			i++;
+		}
+	}
 	else
 	{
 		i = 0;
@@ -40,7 +61,7 @@ void	print_dolar(t_main *main, char *arg)
 	}
 }
 
-int	check_dolar(char *user_input)
+int check_$(char *user_input)
 {
 	int	i;
 	int	flag;
@@ -82,9 +103,9 @@ void	print_args(char **args, char *user_input, int i, t_main *main)
 	j = 0;
 	while (j < (int)ft_strlen(args[i]))
 	{
-		if (args[i][j] == '$' && check_dolar(user_input) == 1)
+		if (args[i][j] == '$' && check_$(user_input) == 1)
 		{
-			print_dolar(main, &args[i][j + 1]);
+			print_$(main, &args[i][j + 1]);
 			while (args[i][j] && args[i][j] != ' ')
 				j++;
 			flag = 0;

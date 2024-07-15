@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgrunho- <tgrunho-@student.42.fr>>         +#+  +:+       +#+        */
+/*   By: macampos <macampos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 17:04:24 by macampos          #+#    #+#             */
-/*   Updated: 2024/06/28 20:06:44 by tgrunho-         ###   ########.fr       */
+/*   Updated: 2024/06/28 16:50:14 by macampos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,25 +50,46 @@ int	*check_paired(char *exported, char **envp, char **envp2, int len)
 {
 	int	*place;
 	int	i;
-	int	j;
 
 	i = 0;
-	j = 0;
-	place = ft_calloc(3, sizeof(int));
+	place = ft_calloc(sizeof(int), 3);
 	place[0] = -1;
 	place[1] = -1;
-	while (envp[i] || envp2[j])
+	while (envp[i] && envp2[i])
 	{
-		if (envp[i] && ft_strncmp(envp[i], exported, len) == 0)
+		if (ft_strncmp(envp[i], exported, len) == 0)
 			place[0] = i;
-		if (envp2[j] && ft_strncmp(envp2[j], exported, len) == 0)
-			place[1] = j;
-		if (envp[i])
-			i++;
-		if (envp2[j])
-			j++;
+		if (ft_strncmp(envp2[i], exported, len) == 0)
+			place[1] = i;
+		i++;
+	}
+	while (envp[i])
+	{
+		if (ft_strncmp(envp[i], exported, len) == 0)
+			place[0] = i;
+		i++;
+	}
+	while (envp2[i])
+	{
+		if (ft_strncmp(envp2[i], exported, len) == 0)
+			place[1] = i;
+		i++;
 	}
 	return (place);
+}
+
+int	ft_strlen_updated(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == '=')
+			return (i);
+		i++;
+	}
+	return (i);
 }
 
 int	check_invalid(char *arg)

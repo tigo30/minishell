@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsargs.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgrunho- <tgrunho-@student.42.fr>>         +#+  +:+       +#+        */
+/*   By: guest <guest@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 00:11:53 by macampos          #+#    #+#             */
-/*   Updated: 2024/06/28 21:08:59 by tgrunho-         ###   ########.fr       */
+/*   Updated: 2024/07/04 19:02:46 by guest            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,10 @@ int	count_redirections(char **argv)
 	i = 0;
 	while (argv[i])
 	{
-		if ((ft_strncmp(argv[i], ">", 1) == 0 && argv[i][1] != ' ')
-			|| (ft_strncmp(argv[i], "<", 1) == 0 && argv[i][1] != ' ')
-			|| (ft_strncmp(argv[i], "<<", 2) == 0 && argv[i][2] != ' ')
-			|| (ft_strncmp(argv[i], ">>", 2) == 0 && argv[i][2] != ' '))
+		if ((ft_strncmp(argv[i], ">", 1) == 0)
+			|| (ft_strncmp(argv[i], "<", 1) == 0)
+			|| (ft_strncmp(argv[i], "<<", 2) == 0)
+			|| (ft_strncmp(argv[i], ">>", 2) == 0))
 			j++;
 		i++;
 	}
@@ -155,8 +155,8 @@ void	free_cmd_args(t_cmd *cmd)
 	int		i;
 	t_cmd	*temporary;
 
-	temporary = cmd;
-	closepipes(cmd);
+	closepipes(cmd->begining);
+	temporary = cmd->begining;
 	while (temporary)
 	{
 		cmd = temporary;
@@ -205,7 +205,7 @@ int	count_dif_redirections(char **argv)
 			a = 1;
 		if ((ft_strncmp(argv[i], "<", 1) == 0 && argv[i][1] != ' ')
 			|| (ft_strncmp(argv[i], "<<", 2) == 0 && argv[i][2] != ' '))
-			b += 1;
+			b = 1;
 		i++;
 	}
 	if (b > 1)
@@ -255,7 +255,7 @@ t_cmd	*set_comands(char *argv, char **envp, t_cmd *cmd, t_main *main)
 		if (i == 0)
 			begin = cmd2;
 		cmd2->begining = begin;
-		set_comands2(cmd2, i);
+		set_comands2(cmd2);
 		if (cmd2->argv2[i + 1])
 		{
 			cmd2->next = ft_calloc(sizeof(t_cmd), sizeof(t_cmd));
@@ -308,3 +308,6 @@ t_cmd	*initiate_args(char *user_input, char **envp, t_cmd *cmd, t_main *main)
 	}
 	return (set_comands(argv, envp, cmd, main));
 }
+
+
+// echo hello > out | cat < Makefile < infile

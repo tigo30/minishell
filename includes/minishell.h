@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgrunho- <tgrunho-@student.42.fr>>         +#+  +:+       +#+        */
+/*   By: guest <guest@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 15:38:36 by macampos          #+#    #+#             */
-/*   Updated: 2024/06/28 21:07:08 by tgrunho-         ###   ########.fr       */
+/*   Updated: 2024/07/04 18:57:14 by guest            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,20 @@ typedef struct s_cmd
 	int				check;
 }					t_cmd;
 
+
+void				free_every_thing(t_cmd *cmd, t_main *main, int *check);
+void				redirection3(t_cmd *cmd, int i, int file);
+void				redirection4(t_cmd *cmd, int i, int file, t_main *main);
+void				alloc_heredoc(t_cmd *cmd, char *alocated);
+int					check_last_redirection(t_cmd *cmd, int i);
+int					check_last_redirection2(t_cmd *cmd, int i);
+void				redirection2(t_cmd *cmd, int i, int file, t_main *main);
+void				redirection_1(t_cmd *cmd, int file, int i, t_main *main);
 int					count_redirections(char **argv);
 void				free_cmd_args(t_cmd *cmd);
 char				**ft_split2(char const *s, char c);
 void				closepipes(t_cmd *cmd);
-void				set_comands2(t_cmd *cmd, int i);
+void				set_comands2(t_cmd *cmd);
 t_main				*execute_function(char *user_input, char **envp, t_cmd *cmd,
 						t_main *main);
 int					pars_args(char **cmds);
@@ -78,7 +87,7 @@ t_main				*set_main2(t_main *main, char **envp, char **envp2,
 						char *exported);
 int					*check_paired(char *exported, char **envp, char **envp2,
 						int len);
-int					strln(char *str);
+int					ft_strlen_updated(char *str);
 int					find_equal(char *arg);
 void				print_export(t_main *main);
 t_main				*set_main3(t_main *main, char **envp, char **envp2,

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgrunho- <tgrunho-@student.42.fr>>         +#+  +:+       +#+        */
+/*   By: macampos <mcamposmendes@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 17:04:31 by macampos          #+#    #+#             */
-/*   Updated: 2024/06/28 19:53:39 by tgrunho-         ###   ########.fr       */
+/*   Updated: 2024/06/27 13:08:52 by macampos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_main	*unset(t_cmd *cmd, t_main *main, char **envp)
 {
-	t_main	*next;
+	t_main *next;
 
 	if (!cmd->args[1])
 	{

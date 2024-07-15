@@ -6,19 +6,19 @@
 #    By: tgrunho- <tgrunho-@student.42.fr>>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/02 15:42:27 by macampos          #+#    #+#              #
-#    Updated: 2024/06/28 20:49:20 by tgrunho-         ###   ########.fr        #
+#    Updated: 2024/07/14 17:18:13 by tgrunho-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
 SRC = src/main.c src/starting_shell.c parsing/parsargs.c parsing/pars_helpers.c parsing/builtins/cd.c parsing/builtins/echo.c parsing/builtins/env.c parsing/builtins/pwd.c parsing/builtins/export.c \
-		parsing/builtins/unset.c parsing/ft_split2.c parsing/builtins/builtins_utils.c parsing/builtins/exit.c parsing/utils.c parsing/signals.c  \
+		parsing/builtins/unset.c parsing/builtins/exit.c parsing/utils.c parsing/signals.c  parsing/utils2.c \
 
 OBJ = $(SRC:.c=.o)
 
 CFLAGS = -Wall -Wextra -g
- 
+
 CC = cc
 
 $(NAME): $(OBJ)
